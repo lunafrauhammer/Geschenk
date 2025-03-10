@@ -36,9 +36,9 @@ function animateFalling(element, speed) {
     
     function fall() {
         position += speed;
-        element.style.top = `${position}px`;
+        element.style.top = `${position + window.scrollY}px`; // Berücksichtigt Scrollposition
         
-        if (position < window.innerHeight) {
+        if (position < document.body.scrollHeight) {
             requestAnimationFrame(fall);
         } else {
             position = Math.random() * -500; // Neustart des Falls mit zufälligem Startpunkt
