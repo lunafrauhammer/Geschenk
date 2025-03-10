@@ -4,7 +4,6 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 .container {
@@ -53,5 +52,16 @@ ul {
     
     body {
         padding: 10px;
+    }
+}
+
+/* Dark Mode verhindern */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #d4edda !important;
+        color: black !important;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.8) !important;
     }
 }
