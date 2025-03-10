@@ -20,13 +20,14 @@ function createEmoji(symbol) {
     
     animateFalling(emoji, Math.random() * 2 + 1);
     
-    emoji.addEventListener("click", function () {
+    emoji.addEventListener("click", function (event) {
+        event.preventDefault(); // Verhindert unerwartetes Verhalten auf Touchscreens
         pulseEmoji(emoji);
     });
     
-    emoji.addEventListener("touchstart", function () {
+    emoji.addEventListener("touchstart", function (event) {
         pulseEmoji(emoji);
-    });
+    }, { passive: true });
 }
 
 function animateFalling(element, speed) {
@@ -55,3 +56,22 @@ function pulseEmoji(emoji) {
         emoji.style.transform = "scale(1)";
     }, 500);
 }
+
+// Dark Mode verhindern und Scrollen ermöglichen
+const style = document.createElement('style');
+style.innerHTML = `
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #d4edda !important;
+      color: black !important;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.8) !important;
+    }
+  }
+
+  html, body {
+    overflow: auto !important;
+  }
+`;
+document.head.appendChild(style);
